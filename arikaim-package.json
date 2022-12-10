@@ -7,12 +7,17 @@
     "help": "https://socket.io/",
     "description": "Socket client JavaScript library",
     "files": [      
-        "io/socket-4.5.1.io.min.js"
+        "websocket.js"
     ],
     "versions": {
         "io": {
             "files": [
                 "io/socket-4.5.1.io.js"
+            ]
+        },
+        "io-min": {
+            "files": [
+                "io/socket-4.5.1.io.min.js"
             ]
         },
         "cdn": {
