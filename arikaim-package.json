@@ -1,6 +1,6 @@
 {
     "title": "Socket client",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "name": "socket",
     "package-type": "library",
     "repository": "https://github.com/arikaim/socket-library.git",

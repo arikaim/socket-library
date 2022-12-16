@@ -36,15 +36,12 @@ function WebSocketClient(url, protocol) {
         if (socket == null) {
             return false;
         }
-        if (socket.readyState == 1) {
-            return true;
-        }
-
-        return false;
+      
+        return true;
     };
 
     this.send = function(data) {
-        if (this.isConnected() == false) {
+        if (isObject(socket) == false) {
             return false;
         }
     
@@ -62,7 +59,7 @@ function WebSocketClient(url, protocol) {
     };
 
     this.close = function(code) {
-        if (this.isConnected() == false) {
+        if (isObject(socket) == false) {
             return;
         }
 
@@ -75,30 +72,32 @@ function WebSocketClient(url, protocol) {
     };
 
     this.getUrl = function() {
-        if (this.isConnected() == false) {
+        if (isObject(socket) == false) {
             return null;
         }
         return socket.url;
     };
 
     this.getState = function() {
-        if (this.isConnected() == false) {
+        if (isObject(socket) == false) {
             return null;
         }
+
         return socket.readyState;
     };
 
     this.getProtocol = function() {
-        if (this.isConnected() == false) {
+        if (isObject(socket) == false) {
             return null;
         }
+
         return socket.protocol;
     };
 
     this.onClose = function(callback) {
         onClose = callback;
-        if (this.isConnected() == false) {
-            return null;
+        if (isObject(socket) == false) {
+            return false;
         }
 
         socket.onclose = onClose;
@@ -106,8 +105,8 @@ function WebSocketClient(url, protocol) {
 
     this.onMessage = function(callback) {
         onMessage = callback;
-        if (this.isConnected() == false) {
-            return null;
+        if (isObject(socket) == false) {
+            return false;
         }
 
         socket.onmessage = onMessage;
@@ -115,8 +114,8 @@ function WebSocketClient(url, protocol) {
 
     this.onOpen = function(callback) {
         onOpen = callback;
-        if (this.isConnected() == false) {
-            return null;
+        if (isObject(socket) == false) {
+            return false;
         }
 
         socket.onopen = onOpen;
@@ -124,8 +123,8 @@ function WebSocketClient(url, protocol) {
 
     this.onError = function(callback) {
         onError = callback;
-        if (this.isConnected() == false) {
-            return null;
+        if (isObject(socket) == false) {
+            return false;
         }
 
         socket.onerror = onError;
