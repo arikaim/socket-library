@@ -33,7 +33,14 @@ function WebSocketClient(url, protocol) {
     };
 
     this.isConnected = function() {
-        return (socket != null);
+        if (socket == null) {
+            return false;
+        }
+        if (socket.readyState == 1) {
+            return true;
+        }
+
+        return false;
     };
 
     this.send = function(data) {
