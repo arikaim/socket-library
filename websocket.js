@@ -7,6 +7,8 @@
 'use strict';
 
 function WebSocketClient(url, protocol) {
+    this.url = url;
+    this.protocol = protocol;
     var socket = null;
     var onClose = null;
     var onMessage = null;
@@ -14,7 +16,20 @@ function WebSocketClient(url, protocol) {
     var onError  = null;
 
     this.connect = function(url, protocol) {
-        socket = new WebSocket(url,protocol);
+        try {
+
+            if (isEmpty(url) == true) {
+                url = this.url;
+            }
+            if (isEmpty(protocol) == true) {
+                protocol = this.protocol;
+            }
+            socket = new WebSocket(url,protocol);
+        } catch (error) {
+            console.error(error);
+            return false;
+        }
+      
         if (onClose != null) {
             socket.onclose = onClose;
         }
@@ -37,7 +52,7 @@ function WebSocketClient(url, protocol) {
             return false;
         }
       
-        return true;
+        return (WebSocket.readyState == WebSocket.OPEN);
     };
 
     this.send = function(data) {
@@ -129,8 +144,4 @@ function WebSocketClient(url, protocol) {
 
         socket.onerror = onError;
     };
-
-    if (typeof url != 'undefined') {
-        this.connect(url,protocol);
-    }
 }
